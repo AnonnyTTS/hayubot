@@ -17,7 +17,7 @@
             --nav-bg: rgba(26, 26, 46, 0.98);
             --primary: #a78bfa;
             --title-color: #ffffff;
-            --max-width: 1100px; /* Evita que as coisas fiquem longe demais no zoom */
+            --max-width: 1100px;
         }
 
         [data-theme="light"] {
@@ -31,125 +31,73 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-
         body { background: var(--bg-body); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
 
-        /* Container Limitador */
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            width: 100%;
-        }
+        .container { max-width: var(--max-width); margin: 0 auto; width: 100%; }
 
         /* NAVBAR COMPACTA */
-        nav {
-            background: var(--nav-bg);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 8px 0;
-        }
-
-        .nav-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 5%;
-        }
-
-        .nav-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
+        nav { background: var(--nav-bg); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; }
+        .nav-content { display: flex; flex-direction: column; align-items: center; padding: 0 5%; }
+        .nav-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .logo { font-weight: 700; font-size: 1.1rem; color: var(--title-color); }
-
         .nav-right-actions { display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 15px; overflow-x: auto; width: 100%; justify-content: center; margin-top: 5px; padding-bottom: 4px; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; }
+        #theme-toggle { background: none; border: 1px solid var(--primary); color: var(--primary); cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        .btn-nav { background: var(--primary); color: white !important; padding: 5px 12px; border-radius: 15px; text-decoration: none; font-weight: 600; font-size: 0.75rem; }
 
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            width: 100%;
-            justify-content: center;
-            margin-top: 5px;
-            padding-bottom: 4px;
-        }
-
-        .nav-links a { 
-            text-decoration: none; 
-            color: var(--text-secondary); 
-            font-weight: 500; 
-            font-size: 0.75rem; /* Menu menor e mais elegante */
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        #theme-toggle {
-            background: none; border: 1px solid var(--primary); color: var(--primary); 
-            cursor: pointer; width: 28px; height: 28px; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; font-size: 0.8rem;
-        }
-
-        .btn-nav { 
-            background: var(--primary); color: white !important; padding: 5px 12px; 
-            border-radius: 15px; text-decoration: none; font-weight: 600; font-size: 0.75rem;
-        }
-
-        /* HERO AJUSTADO */
+        /* HERO REORGANIZADO PARA CELULAR */
         .hero { 
             display: flex; 
-            flex-wrap: wrap; 
+            flex-direction: column; /* Força ordem vertical no celular */
             align-items: center; 
-            padding: 40px 5%; 
-            gap: 20px; 
-            min-height: 60vh; 
+            padding: 30px 5%; 
+            gap: 25px; 
+            text-align: center;
         }
 
-        .hero-content { flex: 1; min-width: 280px; text-align: center; }
-        .hero-content h1 { font-size: clamp(1.8rem, 6vw, 3rem); color: var(--title-color); margin-bottom: 10px; }
-        .hero-content p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 20px; }
+        .hero-content { order: 1; width: 100%; } /* Título e texto primeiro */
+        .hero-img { order: 2; display: flex; justify-content: center; width: 100%; } /* Imagem segundo */
+        .hero-btns { order: 3; display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 280px; } /* Botões por último */
 
-        .hero-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 250px; margin: 0 auto; }
-        .btn-main, .btn-white { padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 600; text-align: center; font-size: 0.9rem; }
-        .btn-main { background: var(--primary); color: white; }
+        .hero-content h1 { font-size: clamp(1.8rem, 7vw, 3rem); color: var(--title-color); margin-bottom: 10px; }
+        .hero-content p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 5px; }
+
+        .btn-main, .btn-white { padding: 14px; border-radius: 12px; text-decoration: none; font-weight: 600; text-align: center; font-size: 0.9rem; width: 100%; }
+        .btn-main { background: var(--primary); color: white; box-shadow: 0 5px 15px rgba(167, 139, 250, 0.3); }
         .btn-white { background: var(--card-bg); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); }
 
-        .hero-img { flex: 1; display: flex; justify-content: center; min-width: 250px; }
         .hero-img img { 
-            width: 220px; height: 220px; border-radius: 50%; border: 6px solid var(--card-bg); 
+            width: 200px; height: 200px; border-radius: 50%; border: 6px solid var(--card-bg); 
             box-shadow: 0 10px 25px rgba(0,0,0,0.2); object-fit: cover;
             animation: float 4s ease-in-out infinite;
         }
 
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* SEÇÕES COMPACTAS */
-        .section-title { padding: 30px 5% 10px; font-size: 1.4rem; text-align: center; color: var(--title-color); }
+        /* AJUSTES PARA DESKTOP (PC) */
+        @media (min-width: 768px) {
+            .nav-content { flex-direction: row; justify-content: space-between; height: 60px; }
+            .nav-links { margin-top: 0; width: auto; gap: 20px; }
+            .hero { flex-direction: row; text-align: left; padding: 60px 5%; justify-content: space-between; }
+            .hero-content { order: 1; flex: 1; }
+            .hero-img { order: 2; flex: 1; }
+            /* No PC, os botões voltam para dentro do hero-content */
+            .hero-btns { margin: 20px 0 0 0; flex-direction: row; max-width: none; }
+            .btn-main, .btn-white { width: auto; padding: 12px 25px; }
+            .hero-img img { width: 300px; height: 300px; }
+        }
+
+        /* OUTRAS SEÇÕES */
+        .section-title { padding: 40px 5% 10px; font-size: 1.4rem; text-align: center; color: var(--title-color); }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; padding: 15px 5%; }
         .card { background: var(--card-bg); padding: 25px 15px; border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
         .card h2 { font-size: 1.8rem; color: var(--primary); }
         .emoji-img { font-size: 2.5rem; margin-bottom: 8px; }
 
-        /* DESKTOP (PC) */
-        @media (min-width: 768px) {
-            .nav-content { flex-direction: row; justify-content: space-between; height: 60px; }
-            .nav-top { width: auto; }
-            .nav-links { width: auto; margin-top: 0; gap: 20px; }
-            .hero-content { text-align: left; }
-            .hero-btns { flex-direction: row; max-width: none; margin: 0; }
-            .hero-img img { width: 300px; height: 300px; }
-        }
-
         .partners-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; padding: 15px 5% 50px; }
         .partner-item { text-align: center; width: 90px; }
         .partner-item img { width: 70px; height: 70px; border-radius: 50%; border: 3px solid var(--card-bg); object-fit: cover; }
-        .partner-item p { font-size: 0.75rem; margin-top: 5px; font-weight: 600; }
-        
         footer { text-align: center; padding: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.75rem; }
     </style>
 </head>
@@ -160,8 +108,8 @@
             <div class="nav-top">
                 <div class="logo">Hayu Bot <span>💜</span></div>
                 <div class="nav-right-actions">
-                    <button id="theme-toggle" aria-label="Tema"><i class="fas fa-sun" id="theme-icon"></i></button>
-                    <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Adicionar</a>
+                    <button id="theme-toggle"><i class="fas fa-sun" id="theme-icon"></i></button>
+                    <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952" class="btn-nav">Adicionar</a>
                 </div>
             </div>
             <div class="nav-links">
@@ -178,88 +126,56 @@
             <div class="hero-content">
                 <h1>Olá, eu sou a Hayu!</h1>
                 <p>Otimize seu Discord com economia, música e proteção em um só lugar.</p>
-                <div class="hero-btns">
-                    <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-main">Adicionar Agora</a>
+                <div class="hero-btns desktop-only"> 
+                    <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952" class="btn-main">Adicionar Agora</a>
                     <a href="https://discord.gg/chh2Cy8aqn" class="btn-white">Suporte</a>
                 </div>
             </div>
+            
             <div class="hero-img">
                 <img src="https://i.postimg.cc/prvQjT4F/Hayu-Foto.png" alt="Hayu Bot">
             </div>
+
+            <div class="hero-btns mobile-only">
+                </div>
         </header>
 
         <section id="stats">
             <h2 class="section-title">Estatísticas</h2>
             <div class="grid-container">
-                <div class="card">
-                    <h2 id="servers">100+</h2>
-                    <p>Servidores</p>
-                </div>
-                <div class="card">
-                    <h2 id="users">100k+</h2>
-                    <p>Usuários</p>
-                </div>
+                <div class="card"><h2 id="servers">100+</h2><p>Servidores</p></div>
+                <div class="card"><h2 id="users">100k+</h2><p>Usuários</p></div>
             </div>
         </section>
 
         <section id="features">
             <h2 class="section-title">Funcionalidades</h2>
             <div class="grid-container">
-                <div class="card">
-                    <span class="emoji-img">🎮</span>
-                    <h3>Diversão</h3>
-                    <p>Interação e jogos para membros.</p>
-                </div>
-                <div class="card">
-                    <span class="emoji-img">💰</span>
-                    <h3>Economia</h3>
-                    <p>Sistema global e cassino.</p>
-                </div>
+                <div class="card"><span class="emoji-img">🎮</span><h3>Diversão</h3><p>Interação e jogos.</p></div>
+                <div class="card"><span class="emoji-img">💰</span><h3>Economia</h3><p>Sistema global.</p></div>
             </div>
         </section>
 
         <section id="parceiros">
             <h2 class="section-title">Parceiros</h2>
             <div class="partners-grid">
-                <div class="partner-item">
-                    <img src="https://cdn.discordapp.com/icons/1050800498346823752/a_4f0ca6d400d3be2911ee1ffa02a1c4b5.gif?size=2048" alt="CDE">
-                    <p>CDE</p>
-                </div>
-                <div class="partner-item">
-                    <img src="https://cdn.discordapp.com/icons/1046428911728337036/a_b322387854adce8f6d44a8d2279ec97b.gif?size=2048" alt="LUND">
-                    <p>LUND</p>
-                </div>
+                <div class="partner-item"><img src="https://cdn.discordapp.com/icons/1050800498346823752/a_4f0ca6d400d3be2911ee1ffa02a1c4b5.gif?size=2048" alt="CDE"><p>CDE</p></div>
+                <div class="partner-item"><img src="https://cdn.discordapp.com/icons/1046428911728337036/a_b322387854adce8f6d44a8d2279ec97b.gif?size=2048" alt="LUND"><p>LUND</p></div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>© 2026 Hayu Bot. Feito com 💜.</p>
-    </footer>
+    <footer><p>© 2026 Hayu Bot. Feito com 💜.</p></footer>
 
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
-        
         toggleBtn.addEventListener('click', () => {
             let theme = document.documentElement.getAttribute('data-theme');
             let newTheme = theme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', newTheme);
             themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         });
-
-        async function fetchStatcord() {
-            try {
-                const res = await fetch('https://api.statcord.com/v1/stats/1096093392678694952');
-                const json = await res.json();
-                if(json.data && json.data[0]) {
-                    const data = json.data[0];
-                    document.getElementById('servers').innerText = data.servers.toLocaleString() + '+';
-                    document.getElementById('users').innerText = (data.users / 1000).toFixed(0) + 'k+';
-                }
-            } catch (e) { console.log("Stats Offline"); }
-        }
-        fetchStatcord();
     </script>
 </body>
 </html>
