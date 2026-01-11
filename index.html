@@ -34,7 +34,7 @@
 
         body { background: var(--bg-body); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
 
-        /* NAV AJUSTADA PARA RESPONSIVIDADE */
+        /* NAV PRINCIPAL */
         nav {
             display: flex; justify-content: space-between; align-items: center; 
             padding: 15px 8%;
@@ -42,23 +42,23 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .logo { display: flex; align-items: center; font-weight: 700; font-size: 1.4rem; color: var(--title-color); flex-shrink: 0; }
-        .logo span { color: var(--primary); margin-left: 5px; }
+        .logo { display: flex; align-items: center; font-weight: 700; font-size: 1.3rem; color: var(--title-color); flex-shrink: 0; }
+        .logo span { color: var(--primary); margin-left: 4px; }
 
         .nav-right { display: flex; align-items: center; gap: 15px; }
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; margin-right: 15px; white-space: nowrap; }
+        .nav-links { display: flex; align-items: center; gap: 15px; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.85rem; white-space: nowrap; }
         .nav-links a:hover { color: var(--primary); }
 
         #theme-toggle {
             background: none; border: 1px solid var(--primary); color: var(--primary); 
-            cursor: pointer; padding: 8px; border-radius: 50%; display: flex; align-items: center; flex-shrink: 0;
+            cursor: pointer; padding: 7px; border-radius: 50%; display: flex; align-items: center; flex-shrink: 0;
         }
 
-        .btn-nav { background: var(--primary); color: white !important; padding: 10px 22px; border-radius: 25px; text-decoration: none; font-weight: 600; white-space: nowrap; font-size: 0.9rem; }
+        .btn-nav { background: var(--primary); color: white !important; padding: 9px 18px; border-radius: 20px; text-decoration: none; font-weight: 600; white-space: nowrap; font-size: 0.85rem; }
 
-        /* HERO */
-        .hero { display: flex; align-items: center; padding: 80px 10%; gap: 50px; min-height: 80vh; }
+        /* HERO SECTION */
+        .hero { display: flex; align-items: center; padding: 60px 10%; gap: 50px; min-height: 80vh; }
         .hero-content { flex: 1; }
         .hero-content h1 { font-size: 3.5rem; color: var(--title-color); margin-bottom: 20px; line-height: 1.1; }
         .hero-content p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 35px; }
@@ -67,48 +67,56 @@
         .btn-main { background: var(--primary); color: white; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; box-shadow: 0 10px 20px rgba(167, 139, 250, 0.2); }
         .btn-white { background: var(--card-bg); color: var(--text-main); padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); }
 
-        .hero-img img { width: 380px; border-radius: 50%; border: 15px solid var(--card-bg); box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: float 4s ease-in-out infinite; object-fit: cover; aspect-ratio: 1/1;}
+        .hero-img img { width: 350px; border-radius: 50%; border: 12px solid var(--card-bg); box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: float 4s ease-in-out infinite; object-fit: cover; aspect-ratio: 1/1;}
         
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
+        /* GRIDS E CARDS */
         .section-title { padding: 60px 10% 20px; font-size: 2rem; font-weight: 700; color: var(--title-color); }
-
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; padding: 20px 10% 60px; }
-        .card { background: var(--card-bg); padding: 50px 30px; border-radius: 30px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        
-        .emoji-img { font-size: 4rem; margin-bottom: 20px; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); }
+        .card { background: var(--card-bg); padding: 40px 25px; border-radius: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .card:hover { transform: translateY(-8px); border-color: var(--primary); }
+        .emoji-img { font-size: 3.5rem; margin-bottom: 15px; display: block; }
+        .card h2 { font-size: 2.2rem; color: var(--primary); margin-bottom: 10px; }
+        .card p { color: var(--text-secondary); line-height: 1.5; font-size: 0.95rem; }
 
-        .card h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
-        .card p { color: var(--text-secondary); line-height: 1.6; }
+        .partners-grid { display: flex; flex-wrap: wrap; gap: 30px; padding: 20px 10% 80px; justify-content: center; }
+        .partner-item { text-align: center; max-width: 120px; }
+        .partner-item img { width: 100px; height: 100px; border-radius: 50%; border: 5px solid var(--card-bg); object-fit: cover; }
+        .partner-item p { margin-top: 10px; font-weight: 600; color: var(--title-color); font-size: 0.8rem; }
 
-        .partners-grid { display: flex; flex-wrap: wrap; gap: 40px; padding: 20px 10% 80px; justify-content: center; }
-        .partner-item { text-align: center; max-width: 150px; }
-        .partner-item img { width: 120px; height: 120px; border-radius: 50%; border: 6px solid var(--card-bg); box-shadow: 0 10px 20px rgba(0,0,0,0.2); object-fit: cover; }
-        .partner-item p { margin-top: 15px; font-weight: 700; color: var(--title-color); font-size: 0.9rem; }
+        footer { text-align: center; padding: 50px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.9rem; }
 
-        footer { text-align: center; padding: 60px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); }
-
-        /* AJUSTES PARA CELULAR (TELA PEQUENA) */
-        @media (max-width: 900px) {
-            nav { padding: 12px 5%; }
-            .hero { flex-direction: column; text-align: center; padding-top: 40px; }
-            .hero-img img { width: 280px; }
-            .hero-btns { justify-content: center; }
-            .hero-content h1 { font-size: 2.5rem; }
+        /* ===========================================
+           AJUSTES PARA CELULAR (TELA PEQUENA) 
+        =========================================== */
+        @media (max-width: 768px) {
+            nav { padding: 10px 4%; }
             
-            /* Ajuste do menu superior no mobile */
-            .nav-links { display: none; } /* Oculta os links internos para não amontoar */
-            .logo { font-size: 1.2rem; }
-            .btn-nav { padding: 8px 15px; font-size: 0.8rem; }
+            .nav-right { gap: 10px; }
+            
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 0.75rem; } /* Menus bem pequenos */
+            
+            .logo { font-size: 1.1rem; }
+            
+            .btn-nav { padding: 7px 12px; font-size: 0.75rem; border-radius: 12px; }
+            
+            #theme-toggle { padding: 5px; }
+
+            .hero { flex-direction: column; text-align: center; padding: 40px 8%; }
+            .hero-img img { width: 240px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-btns { justify-content: center; }
         }
 
-        /* AJUSTE PARA CELULARES MUITO PEQUENOS */
+        /* CELULARES MUITO PEQUENOS (Abaixo de 400px) */
         @media (max-width: 400px) {
-            nav { padding: 10px 3%; }
+            nav { padding: 10px 2%; }
+            .nav-links { gap: 8px; }
+            .nav-links a { font-size: 0.7rem; }
             .logo { font-size: 1rem; }
-            .btn-nav { padding: 6px 10px; font-size: 0.75rem; }
-            .nav-right { gap: 8px; }
+            .btn-nav { font-size: 0.7rem; padding: 6px 10px; }
         }
     </style>
 </head>
@@ -120,12 +128,11 @@
             <div class="nav-links">
                 <a href="#features">Funções</a>
                 <a href="#stats">Stats</a>
-                <a href="#parceiros">Parceiros</a>
             </div>
             <button id="theme-toggle" title="Mudar Tema">
                 <i class="fas fa-sun" id="theme-icon"></i>
             </button>
-            <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Me Adicione</a>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Add</a>
         </div>
     </nav>
 
@@ -134,7 +141,7 @@
             <h1>Olá, eu sou a Hayu!</h1>
             <p>Leve o seu servidor para o próximo nível com economia própria, música de alta qualidade e proteção avançada. ✨</p>
             <div class="hero-btns">
-                <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-main">Adicionar ao Discord</a>
+                <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-main">Adicionar</a>
                 <a href="https://discord.gg/chh2Cy8aqn" class="btn-white">Suporte</a>
             </div>
         </div>
@@ -182,7 +189,7 @@
             <div class="card">
                 <span class="emoji-img">🎵</span>
                 <h3>Música</h3>
-                <p>Player de alta fidelidade para curtir playlists do Spotify/YouTube.</p>
+                <p>Player de alta fidelidade para curtir playlists.</p>
             </div>
         </div>
     </section>
@@ -206,20 +213,13 @@
     </section>
 
     <footer>
-        <p>© 2026 Hayu Bot. Feito com 💜. Todos os direitos reservados.</p>
+        <p>© 2026 Hayu Bot. Feito com 💜.</p>
     </footer>
 
     <script>
-        // FORÇAR INÍCIO NO TOPO AO DAR F5
-        window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
-        };
+        window.onbeforeunload = function () { window.scrollTo(0, 0); };
+        if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
 
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        }
-
-        // TEMA ESCURO POR PADRÃO
         const toggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         
@@ -230,7 +230,6 @@
         toggleBtn.addEventListener('click', () => {
             let theme = document.documentElement.getAttribute('data-theme');
             let newTheme = theme === 'dark' ? 'light' : 'dark';
-            
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
@@ -244,7 +243,6 @@
             }
         }
 
-        // STATCORD API INTEGRATION
         async function fetchStatcord() {
             try {
                 const res = await fetch('https://api.statcord.com/v1/stats/1096093392678694952');
@@ -255,9 +253,7 @@
                     document.getElementById('users').innerText = (data.users / 1000).toFixed(1) + 'k+';
                     document.getElementById('commands').innerText = data.commands.toLocaleString();
                 }
-            } catch (e) {
-                console.log("Statcord offline");
-            }
+            } catch (e) { console.log("Statcord offline"); }
         }
         fetchStatcord();
     </script>
