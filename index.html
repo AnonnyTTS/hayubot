@@ -2,7 +2,7 @@
 <html lang="pt-br" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Hayu Bot</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>">
     
@@ -14,10 +14,9 @@
             --text-main: #e2e8f0;
             --text-secondary: #a0aec0;
             --card-bg: #1f1f38;
-            --nav-bg: rgba(26, 26, 46, 0.9);
+            --nav-bg: rgba(26, 26, 46, 0.95);
             --primary: #a78bfa;
             --title-color: #ffffff;
-            --accent: #8a73d4;
         }
 
         [data-theme="light"] {
@@ -25,97 +24,120 @@
             --text-main: #4a4a68;
             --text-secondary: #718096;
             --card-bg: #ffffff;
-            --nav-bg: rgba(255, 255, 255, 0.8);
+            --nav-bg: rgba(255, 255, 255, 0.95);
             --primary: #8a73d4;
             --title-color: #2d3748;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; transition: all 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
 
         body { background: var(--bg-body); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
 
+        /* HEADER / NAVBAR CORRIGIDA */
         nav {
-            display: flex; justify-content: space-between; align-items: center; padding: 15px 8%;
+            display: flex; flex-direction: column; align-items: center;
             background: var(--nav-bg); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05); padding: 10px 5%;
         }
 
-        .logo { display: flex; align-items: center; font-weight: 700; font-size: 1.4rem; color: var(--title-color); }
-        .logo span { color: var(--primary); margin-left: 5px; }
+        .nav-top {
+            display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 5px;
+        }
 
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-        .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; margin-right: 15px; }
-        .nav-links a:hover { color: var(--primary); }
+        .logo { font-weight: 700; font-size: 1.2rem; color: var(--title-color); display: flex; align-items: center; }
+        .logo span { margin-left: 5px; }
+
+        .nav-right-actions { display: flex; align-items: center; gap: 10px; }
+
+        /* Links que agora funcionam no celular via scroll horizontal */
+        .nav-links {
+            display: flex; gap: 20px; overflow-x: auto; width: 100%; white-space: nowrap;
+            padding: 5px 0; scrollbar-width: none; justify-content: center;
+        }
+        .nav-links::-webkit-scrollbar { display: none; }
+        
+        .nav-links a { 
+            text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.85rem; 
+            padding: 5px 10px;
+        }
 
         #theme-toggle {
             background: none; border: 1px solid var(--primary); color: var(--primary); 
-            cursor: pointer; padding: 8px; border-radius: 50%; display: flex; align-items: center;
+            cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
         }
 
-        .btn-nav { background: var(--primary); color: white !important; padding: 10px 22px; border-radius: 25px; text-decoration: none; font-weight: 600; }
-
-        .hero { display: flex; align-items: center; padding: 80px 10%; gap: 50px; min-height: 80vh; }
-        .hero-content { flex: 1; }
-        .hero-content h1 { font-size: 3.5rem; color: var(--title-color); margin-bottom: 20px; line-height: 1.1; }
-        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 35px; }
-
-        .hero-btns { display: flex; gap: 15px; }
-        .btn-main { background: var(--primary); color: white; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; box-shadow: 0 10px 20px rgba(167, 139, 250, 0.2); }
-        .btn-white { background: var(--card-bg); color: var(--text-main); padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); }
-
-        .hero-img img { width: 380px; border-radius: 50%; border: 15px solid var(--card-bg); box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: float 4s ease-in-out infinite; object-fit: cover; aspect-ratio: 1/1;}
-        
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
-        .section-title { padding: 60px 10% 20px; font-size: 2rem; font-weight: 700; color: var(--title-color); }
-
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; padding: 20px 10% 60px; }
-        .card { background: var(--card-bg); padding: 50px 30px; border-radius: 30px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        
-        .emoji-img { font-size: 4rem; margin-bottom: 20px; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); }
-
-        .card h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
-        .card p { color: var(--text-secondary); line-height: 1.6; }
-
-        .partners-grid { display: flex; flex-wrap: wrap; gap: 40px; padding: 20px 10% 80px; justify-content: center; }
-        .partner-item { text-align: center; max-width: 150px; }
-        .partner-item img { width: 120px; height: 120px; border-radius: 50%; border: 6px solid var(--card-bg); box-shadow: 0 10px 20px rgba(0,0,0,0.2); object-fit: cover; }
-        .partner-item p { margin-top: 15px; font-weight: 700; color: var(--title-color); font-size: 0.9rem; }
-
-        footer { text-align: center; padding: 60px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); }
-
-        @media (max-width: 900px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 40px; }
-            .hero-img img { width: 280px; }
-            .nav-links { display: none; }
+        .btn-nav { 
+            background: var(--primary); color: white !important; padding: 6px 14px; 
+            border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.8rem;
         }
+
+        /* HERO SECTION */
+        .hero { display: flex; flex-wrap: wrap; align-items: center; padding: 40px 8%; gap: 30px; min-height: 70vh; }
+        .hero-content { flex: 1; min-width: 280px; text-align: center; }
+        .hero-content h1 { font-size: clamp(2rem, 8vw, 3.5rem); color: var(--title-color); margin-bottom: 15px; }
+        .hero-content p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 25px; }
+
+        .hero-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 300px; margin: 0 auto; }
+        .btn-main, .btn-white { padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; text-align: center; }
+        .btn-main { background: var(--primary); color: white; }
+        .btn-white { background: var(--card-bg); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); }
+
+        .hero-img { flex: 1; display: flex; justify-content: center; min-width: 280px; }
+        .hero-img img { 
+            width: 260px; height: 260px; border-radius: 50%; border: 8px solid var(--card-bg); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3); object-fit: cover;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* GRIDS */
+        .section-title { padding: 40px 5% 10px; font-size: 1.6rem; text-align: center; color: var(--title-color); }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px 5%; }
+        .card { background: var(--card-bg); padding: 30px 20px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .emoji-img { font-size: 3rem; margin-bottom: 10px; display: block; }
+
+        /* MEDIA QUERIES PARA AJUSTE FINO */
+        @media (min-width: 768px) {
+            nav { flex-direction: row; justify-content: space-between; padding: 15px 8%; }
+            .nav-top { width: auto; margin-bottom: 0; }
+            .nav-links { width: auto; gap: 25px; margin-top: 0; }
+            .hero-content { text-align: left; }
+            .hero-btns { flex-direction: row; max-width: none; }
+            .hero-img img { width: 350px; height: 350px; }
+        }
+
+        .partners-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding: 20px 5% 60px; }
+        .partner-item { text-align: center; width: 100px; }
+        .partner-item img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--card-bg); object-fit: cover; }
+        footer { text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <nav id="top">
-        <div class="logo">Hayu Bot <span>💜</span></div>
-        <div class="nav-right">
-            <div class="nav-links">
-                <a href="#features">Funções</a>
-                <a href="#stats">Stats</a>
-                <a href="#parceiros">Parceiros</a>
+    <nav>
+        <div class="nav-top">
+            <div class="logo">Hayu Bot <span>💜</span></div>
+            <div class="nav-right-actions">
+                <button id="theme-toggle"><i class="fas fa-sun" id="theme-icon"></i></button>
+                <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Adicionar</a>
             </div>
-            <button id="theme-toggle">
-                <i class="fas fa-sun" id="theme-icon"></i>
-            </button>
-            <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Me Adicione</a>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Funções</a>
+            <a href="#stats">Estatísticas</a>
+            <a href="#parceiros">Parceiros</a>
+            <a href="https://discord.gg/chh2Cy8aqn">Suporte</a>
         </div>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
             <h1>Olá, eu sou a Hayu!</h1>
-            <p>Leve o seu servidor para o próximo nível com economia própria, música de alta qualidade e proteção avançada. ✨</p>
+            <p>Leve o seu servidor para o próximo nível com economia, música e proteção avançada.</p>
             <div class="hero-btns">
                 <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-main">Adicionar ao Discord</a>
-                <a href="https://discord.gg/chh2Cy8aqn" class="btn-white">Suporte</a>
+                <a href="https://discord.gg/chh2Cy8aqn" class="btn-white">Servidor de Suporte</a>
             </div>
         </div>
         <div class="hero-img">
@@ -128,15 +150,11 @@
         <div class="grid-container">
             <div class="card">
                 <h2 id="servers">100+</h2>
-                <p>Servidores Ativos</p>
+                <p>Servidores</p>
             </div>
             <div class="card">
                 <h2 id="users">100k+</h2>
-                <p>Usuários Totais</p>
-            </div>
-            <div class="card">
-                <h2 id="commands">150k+</h2>
-                <p>Comandos diários</p>
+                <p>Usuários</p>
             </div>
         </div>
     </section>
@@ -147,28 +165,18 @@
             <div class="card">
                 <span class="emoji-img">🎮</span>
                 <h3>Diversão</h3>
-                <p>Jogos e comandos de interação para animar o dia dos membros.</p>
+                <p>Comandos de interação para os membros.</p>
             </div>
             <div class="card">
                 <span class="emoji-img">💰</span>
                 <h3>Economia</h3>
-                <p>Sistema global de sonhos, cassino e loja customizável.</p>
-            </div>
-            <div class="card">
-                <span class="emoji-img">🛡️</span>
-                <h3>Moderação</h3>
-                <p>Mantenha seu servidor seguro com ferramentas de punição rápidas.</p>
-            </div>
-            <div class="card">
-                <span class="emoji-img">🎵</span>
-                <h3>Música</h3>
-                <p>Player de alta fidelidade para curtir playlists do Spotify/YouTube.</p>
+                <p>Sistema global de sonhos e cassino.</p>
             </div>
         </div>
     </section>
 
     <section id="parceiros">
-        <h2 class="section-title">Servidores Parceiros</h2>
+        <h2 class="section-title">Parceiros</h2>
         <div class="partners-grid">
             <div class="partner-item">
                 <img src="https://cdn.discordapp.com/icons/1050800498346823752/a_4f0ca6d400d3be2911ee1ffa02a1c4b5.gif?size=2048" alt="CDE">
@@ -178,53 +186,24 @@
                 <img src="https://cdn.discordapp.com/icons/1046428911728337036/a_b322387854adce8f6d44a8d2279ec97b.gif?size=2048" alt="LUND">
                 <p>LUND</p>
             </div>
-            <div class="partner-item">
-                <img src="https://cdn.discordapp.com/avatars/1282729308452028448/a_195136dd3d4b8f9d127db39344253a8d.gif?size=2048" alt="BDR HOT">
-                <p>BDR HOT</p>
-            </div>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 Hayu Bot. Feito com 💜. Todos os direitos reservados.</p>
+        <p>© 2026 Hayu Bot. Feito com 💜.</p>
     </footer>
 
     <script>
-        // FORÇAR INÍCIO NO TOPO AO DAR F5
-        window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
-        };
-
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        }
-
-        // TEMA ESCURO POR PADRÃO
         const toggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         
-        let currentTheme = 'dark'; // Força sempre dark no início
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        updateIcon(currentTheme);
-
         toggleBtn.addEventListener('click', () => {
             let theme = document.documentElement.getAttribute('data-theme');
             let newTheme = theme === 'dark' ? 'light' : 'dark';
-            
             document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcon(newTheme);
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         });
 
-        function updateIcon(theme) {
-            if (theme === 'dark') {
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-            }
-        }
-
-        // STATCORD API INTEGRATION
         async function fetchStatcord() {
             try {
                 const res = await fetch('https://api.statcord.com/v1/stats/1096093392678694952');
@@ -232,15 +211,11 @@
                 if(json.data && json.data[0]) {
                     const data = json.data[0];
                     document.getElementById('servers').innerText = data.servers.toLocaleString() + '+';
-                    document.getElementById('users').innerText = (data.users / 1000).toFixed(1) + 'k+';
-                    document.getElementById('commands').innerText = data.commands.toLocaleString();
+                    document.getElementById('users').innerText = (data.users / 1000).toFixed(0) + 'k+';
                 }
-            } catch (e) {
-                console.log("Statcord offline");
-            }
+            } catch (e) { console.log("Erro ao carregar stats"); }
         }
         fetchStatcord();
     </script>
 </body>
-
 </html>
