@@ -34,71 +34,61 @@
 
         body { background: var(--bg-body); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
 
-        /* NAV - AJUSTADA PARA CABER TUDO NO CELULAR */
         nav {
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 5%; /* Padding reduzido para ganhar espaço */
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 8%;
             background: var(--nav-bg); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            width: 100%;
         }
 
-        .logo { display: flex; align-items: center; font-weight: 700; font-size: 1.2rem; color: var(--title-color); flex-shrink: 0; }
+        .logo { display: flex; align-items: center; font-weight: 700; font-size: 1.4rem; color: var(--title-color); }
         .logo span { color: var(--primary); margin-left: 5px; }
 
-        .nav-right { display: flex; align-items: center; gap: 10px; }
-        .nav-links { display: flex; align-items: center; gap: 8px; } /* Gap menor no PC também ajuda no mobile */
-        .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.8rem; white-space: nowrap; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; margin-right: 15px; }
         .nav-links a:hover { color: var(--primary); }
 
         #theme-toggle {
             background: none; border: 1px solid var(--primary); color: var(--primary); 
-            cursor: pointer; padding: 6px; border-radius: 50%; display: flex; align-items: center; flex-shrink: 0;
+            cursor: pointer; padding: 8px; border-radius: 50%; display: flex; align-items: center;
         }
 
-        .btn-nav { background: var(--primary); color: white !important; padding: 8px 15px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 0.8rem; white-space: nowrap; }
+        .btn-nav { background: var(--primary); color: white !important; padding: 10px 22px; border-radius: 25px; text-decoration: none; font-weight: 600; }
 
-        /* HERO */
         .hero { display: flex; align-items: center; padding: 80px 10%; gap: 50px; min-height: 80vh; }
         .hero-content { flex: 1; }
         .hero-content h1 { font-size: 3.5rem; color: var(--title-color); margin-bottom: 20px; line-height: 1.1; }
         .hero-content p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 35px; }
-        .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        .hero-btns { display: flex; gap: 15px; }
         .btn-main { background: var(--primary); color: white; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; box-shadow: 0 10px 20px rgba(167, 139, 250, 0.2); }
         .btn-white { background: var(--card-bg); color: var(--text-main); padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); }
+
         .hero-img img { width: 380px; border-radius: 50%; border: 15px solid var(--card-bg); box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: float 4s ease-in-out infinite; object-fit: cover; aspect-ratio: 1/1;}
+        
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* OUTRAS SEÇÕES */
         .section-title { padding: 60px 10% 20px; font-size: 2rem; font-weight: 700; color: var(--title-color); }
+
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; padding: 20px 10% 60px; }
         .card { background: var(--card-bg); padding: 50px 30px; border-radius: 30px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
         .card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        .emoji-img { font-size: 4rem; margin-bottom: 20px; display: block; }
+        
+        .emoji-img { font-size: 4rem; margin-bottom: 20px; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); }
+
         .card h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
         .card p { color: var(--text-secondary); line-height: 1.6; }
 
         .partners-grid { display: flex; flex-wrap: wrap; gap: 40px; padding: 20px 10% 80px; justify-content: center; }
         .partner-item { text-align: center; max-width: 150px; }
-        .partner-item img { width: 120px; height: 120px; border-radius: 50%; border: 6px solid var(--card-bg); object-fit: cover; }
+        .partner-item img { width: 120px; height: 120px; border-radius: 50%; border: 6px solid var(--card-bg); box-shadow: 0 10px 20px rgba(0,0,0,0.2); object-fit: cover; }
         .partner-item p { margin-top: 15px; font-weight: 700; color: var(--title-color); font-size: 0.9rem; }
 
         footer { text-align: center; padding: 60px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); }
 
-        /* RESPONSIVIDADE MOBILE - BARRA SEMPRE EM CIMA */
         @media (max-width: 900px) {
             .hero { flex-direction: column; text-align: center; padding-top: 40px; }
             .hero-img img { width: 280px; }
-            .hero-btns { justify-content: center; }
-        }
-
-        @media (max-width: 600px) {
-            nav { padding: 10px 2%; } /* Reduz espaço lateral ao máximo */
-            .logo { font-size: 1rem; }
-            .nav-links a { font-size: 0.7rem; margin-right: 0; }
-            .nav-links { gap: 6px; }
-            .btn-nav { padding: 6px 10px; font-size: 0.7rem; }
-            #theme-toggle { padding: 4px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -115,7 +105,7 @@
             <button id="theme-toggle">
                 <i class="fas fa-sun" id="theme-icon"></i>
             </button>
-            <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Adicionar</a>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Me Adicione</a>
         </div>
     </nav>
 
@@ -200,19 +190,27 @@
     </footer>
 
     <script>
-        window.onbeforeunload = function () { window.scrollTo(0, 0); };
-        if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
+        // FORÇAR INÍCIO NO TOPO AO DAR F5
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
 
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // TEMA ESCURO POR PADRÃO
         const toggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         
-        let currentTheme = localStorage.getItem('theme') || 'dark';
+        let currentTheme = 'dark'; // Força sempre dark no início
         document.documentElement.setAttribute('data-theme', currentTheme);
         updateIcon(currentTheme);
 
         toggleBtn.addEventListener('click', () => {
             let theme = document.documentElement.getAttribute('data-theme');
             let newTheme = theme === 'dark' ? 'light' : 'dark';
+            
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
@@ -226,6 +224,7 @@
             }
         }
 
+        // STATCORD API INTEGRATION
         async function fetchStatcord() {
             try {
                 const res = await fetch('https://api.statcord.com/v1/stats/1096093392678694952');
@@ -236,9 +235,13 @@
                     document.getElementById('users').innerText = (data.users / 1000).toFixed(1) + 'k+';
                     document.getElementById('commands').innerText = data.commands.toLocaleString();
                 }
-            } catch (e) { console.log("Statcord offline"); }
+            } catch (e) {
+                console.log("Statcord offline");
+            }
         }
         fetchStatcord();
     </script>
 </body>
+
 </html>
+
