@@ -2,7 +2,7 @@
 <html lang="pt-br" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hayu Bot</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>">
     
@@ -14,10 +14,10 @@
             --text-main: #e2e8f0;
             --text-secondary: #a0aec0;
             --card-bg: #1f1f38;
-            --nav-bg: rgba(26, 26, 46, 0.98);
+            --nav-bg: rgba(26, 26, 46, 0.9);
             --primary: #a78bfa;
             --title-color: #ffffff;
-            --max-width: 1000px; /* Reduzi um pouco para ficar mais compacto e elegante */
+            --accent: #8a73d4;
         }
 
         [data-theme="light"] {
@@ -25,191 +25,226 @@
             --text-main: #4a4a68;
             --text-secondary: #718096;
             --card-bg: #ffffff;
-            --nav-bg: rgba(255, 255, 255, 0.98);
+            --nav-bg: rgba(255, 255, 255, 0.8);
             --primary: #8a73d4;
             --title-color: #2d3748;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; transition: all 0.3s ease; }
+
         body { background: var(--bg-body); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
 
-        /* Container que segura tudo no centro sem espalhar no zoom out */
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            width: 90%; /* Mantém uma margem nas bordas em telas médias */
+        /* NAV AJUSTADA PARA RESPONSIVIDADE */
+        nav {
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 8%;
+            background: var(--nav-bg); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* NAVBAR */
-        nav { background: var(--nav-bg); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 0; }
-        .nav-content { display: flex; flex-direction: column; align-items: center; }
-        .nav-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo { font-weight: 700; font-size: 1.1rem; color: var(--title-color); }
-        .nav-right-actions { display: flex; align-items: center; gap: 8px; }
-        .nav-links { display: flex; gap: 15px; overflow-x: auto; width: 100%; justify-content: center; margin-top: 5px; padding-bottom: 4px; }
-        .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        #theme-toggle { background: none; border: 1px solid var(--primary); color: var(--primary); cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
-        .btn-nav { background: var(--primary); color: white !important; padding: 5px 12px; border-radius: 15px; text-decoration: none; font-weight: 600; font-size: 0.75rem; }
+        .logo { display: flex; align-items: center; font-weight: 700; font-size: 1.4rem; color: var(--title-color); flex-shrink: 0; }
+        .logo span { color: var(--primary); margin-left: 5px; }
 
-        /* HERO REFORMULADO */
-        .hero { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding: 40px 0; 
-            gap: 30px; 
-            min-height: 60vh;
-            text-align: center;
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; margin-right: 15px; white-space: nowrap; }
+        .nav-links a:hover { color: var(--primary); }
+
+        #theme-toggle {
+            background: none; border: 1px solid var(--primary); color: var(--primary); 
+            cursor: pointer; padding: 8px; border-radius: 50%; display: flex; align-items: center; flex-shrink: 0;
         }
 
-        /* Controla a largura do conteúdo para não esticar demais */
-        .hero-content { max-width: 500px; width: 100%; }
-        .hero-content h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); color: var(--title-color); margin-bottom: 10px; line-height: 1.2; }
-        .hero-content p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 25px; }
+        .btn-nav { background: var(--primary); color: white !important; padding: 10px 22px; border-radius: 25px; text-decoration: none; font-weight: 600; white-space: nowrap; font-size: 0.9rem; }
 
-        .hero-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 250px; margin: 0 auto; }
-        .btn-main, .btn-white { padding: 12px; border-radius: 10px; text-decoration: none; font-weight: 600; text-align: center; font-size: 0.9rem; transition: 0.3s; }
-        .btn-main { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.2); }
-        .btn-white { background: var(--card-bg); color: var(--text-main); border: 1px solid rgba(255,255,255,0.1); }
-        .btn-main:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        /* HERO */
+        .hero { display: flex; align-items: center; padding: 80px 10%; gap: 50px; min-height: 80vh; }
+        .hero-content { flex: 1; }
+        .hero-content h1 { font-size: 3.5rem; color: var(--title-color); margin-bottom: 20px; line-height: 1.1; }
+        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 35px; }
 
-        .hero-img { display: flex; justify-content: center; }
-        .hero-img img { 
-            width: 200px; height: 200px; border-radius: 50%; border: 6px solid var(--card-bg); 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); object-fit: cover;
-            animation: float 4s ease-in-out infinite;
-        }
+        .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn-main { background: var(--primary); color: white; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; box-shadow: 0 10px 20px rgba(167, 139, 250, 0.2); }
+        .btn-white { background: var(--card-bg); color: var(--text-main); padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); }
 
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-
-        /* DESKTOP (PC) - Correção de espaço no Zoom Out */
-        @media (min-width: 768px) {
-            .nav-content { flex-direction: row; justify-content: space-between; height: 60px; }
-            .nav-links { margin: 0; width: auto; gap: 20px; }
-            
-            .hero { 
-                flex-direction: row; 
-                text-align: left; 
-                justify-content: center; /* Centraliza o par (Texto + Imagem) */
-                gap: 80px; /* Espaço fixo entre texto e imagem no PC */
-            }
-            .hero-content { flex: 0 1 450px; } /* Define um tamanho fixo ideal */
-            .hero-btns { flex-direction: row; max-width: none; margin: 0; }
-            .btn-main, .btn-white { padding: 12px 25px; width: auto; }
-            .hero-img img { width: 280px; height: 280px; }
-        }
-
-        /* SEÇÕES */
-        .section-title { padding: 40px 0 15px; font-size: 1.4rem; text-align: center; color: var(--title-color); }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding-bottom: 40px; }
-        .card { background: var(--card-bg); padding: 30px 20px; border-radius: 18px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
-        .card h2 { font-size: 1.8rem; color: var(--primary); margin-bottom: 5px; }
-        .emoji-img { font-size: 2.5rem; margin-bottom: 10px; display: block; }
-
-        .partners-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding-bottom: 60px; }
-        .partner-item { text-align: center; width: 90px; }
-        .partner-item img { width: 75px; height: 75px; border-radius: 50%; border: 3px solid var(--card-bg); object-fit: cover; transition: 0.3s; }
-        .partner-item img:hover { border-color: var(--primary); transform: scale(1.05); }
-        .partner-item p { font-size: 0.75rem; margin-top: 8px; font-weight: 600; color: var(--text-secondary); }
+        .hero-img img { width: 380px; border-radius: 50%; border: 15px solid var(--card-bg); box-shadow: 0 25px 50px rgba(0,0,0,0.3); animation: float 4s ease-in-out infinite; object-fit: cover; aspect-ratio: 1/1;}
         
-        footer { text-align: center; padding: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); font-size: 0.75rem; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        .section-title { padding: 60px 10% 20px; font-size: 2rem; font-weight: 700; color: var(--title-color); }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; padding: 20px 10% 60px; }
+        .card { background: var(--card-bg); padding: 50px 30px; border-radius: 30px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        
+        .emoji-img { font-size: 4rem; margin-bottom: 20px; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); }
+
+        .card h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+        .card p { color: var(--text-secondary); line-height: 1.6; }
+
+        .partners-grid { display: flex; flex-wrap: wrap; gap: 40px; padding: 20px 10% 80px; justify-content: center; }
+        .partner-item { text-align: center; max-width: 150px; }
+        .partner-item img { width: 120px; height: 120px; border-radius: 50%; border: 6px solid var(--card-bg); box-shadow: 0 10px 20px rgba(0,0,0,0.2); object-fit: cover; }
+        .partner-item p { margin-top: 15px; font-weight: 700; color: var(--title-color); font-size: 0.9rem; }
+
+        footer { text-align: center; padding: 60px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-secondary); }
+
+        /* AJUSTES PARA CELULAR (TELA PEQUENA) */
+        @media (max-width: 900px) {
+            nav { padding: 12px 5%; }
+            .hero { flex-direction: column; text-align: center; padding-top: 40px; }
+            .hero-img img { width: 280px; }
+            .hero-btns { justify-content: center; }
+            .hero-content h1 { font-size: 2.5rem; }
+            
+            /* Ajuste do menu superior no mobile */
+            .nav-links { display: none; } /* Oculta os links internos para não amontoar */
+            .logo { font-size: 1.2rem; }
+            .btn-nav { padding: 8px 15px; font-size: 0.8rem; }
+        }
+
+        /* AJUSTE PARA CELULARES MUITO PEQUENOS */
+        @media (max-width: 400px) {
+            nav { padding: 10px 3%; }
+            .logo { font-size: 1rem; }
+            .btn-nav { padding: 6px 10px; font-size: 0.75rem; }
+            .nav-right { gap: 8px; }
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="container nav-content">
-            <div class="nav-top">
-                <div class="logo">Hayu Bot <span>💜</span></div>
-                <div class="nav-right-actions">
-                    <button id="theme-toggle" aria-label="Trocar Tema"><i class="fas fa-sun" id="theme-icon"></i></button>
-                    <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Adicionar</a>
-                </div>
-            </div>
+    <nav id="top">
+        <div class="logo">Hayu<span>💜</span></div>
+        <div class="nav-right">
             <div class="nav-links">
                 <a href="#features">Funções</a>
-                <a href="#stats">Estatísticas</a>
+                <a href="#stats">Stats</a>
                 <a href="#parceiros">Parceiros</a>
-                <a href="https://discord.gg/chh2Cy8aqn">Suporte</a>
             </div>
+            <button id="theme-toggle" title="Mudar Tema">
+                <i class="fas fa-sun" id="theme-icon"></i>
+            </button>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-nav">Me Adicione</a>
         </div>
     </nav>
 
-    <main class="container">
-        <header class="hero">
-            <div class="hero-content">
-                <h1>Olá, eu sou a Hayu!</h1>
-                <p>Otimize seu servidor com economia global, música premium e proteção completa em um só lugar.</p>
-                <div class="hero-btns">
-                    <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-main">Adicionar Agora</a>
-                    <a href="https://discord.gg/chh2Cy8aqn" class="btn-white">Suporte</a>
-                </div>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Olá, eu sou a Hayu!</h1>
+            <p>Leve o seu servidor para o próximo nível com economia própria, música de alta qualidade e proteção avançada. ✨</p>
+            <div class="hero-btns">
+                <a href="https://discord.com/api/oauth2/authorize?client_id=1096093392678694952&permissions=8&scope=bot%20applications.commands" class="btn-main">Adicionar ao Discord</a>
+                <a href="https://discord.gg/chh2Cy8aqn" class="btn-white">Suporte</a>
             </div>
-            <div class="hero-img">
-                <img src="https://i.postimg.cc/prvQjT4F/Hayu-Foto.png" alt="Hayu Bot Avatar">
-            </div>
-        </header>
+        </div>
+        <div class="hero-img">
+            <img src="https://i.postimg.cc/prvQjT4F/Hayu-Foto.png" alt="Hayu Bot">
+        </div>
+    </header>
 
-        <section id="stats">
-            <h2 class="section-title">Nossos Números</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <h2 id="servers">100+</h2>
-                    <p>Servidores</p>
-                </div>
-                <div class="card">
-                    <h2 id="users">100k+</h2>
-                    <p>Usuários</p>
-                </div>
+    <section id="stats">
+        <h2 class="section-title">Estatísticas</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h2 id="servers">100+</h2>
+                <p>Servidores Ativos</p>
             </div>
-        </section>
+            <div class="card">
+                <h2 id="users">100k+</h2>
+                <p>Usuários Totais</p>
+            </div>
+            <div class="card">
+                <h2 id="commands">150k+</h2>
+                <p>Comandos diários</p>
+            </div>
+        </div>
+    </section>
 
-        <section id="features">
-            <h2 class="section-title">Funcionalidades</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <span class="emoji-img">🎮</span>
-                    <h3>Diversão</h3>
-                    <p>Interação e jogos para animar seu chat.</p>
-                </div>
-                <div class="card">
-                    <span class="emoji-img">💰</span>
-                    <h3>Economia</h3>
-                    <p>Sistema global de sonhos e cassino.</p>
-                </div>
+    <section id="features">
+        <h2 class="section-title">Funcionalidades</h2>
+        <div class="grid-container">
+            <div class="card">
+                <span class="emoji-img">🎮</span>
+                <h3>Diversão</h3>
+                <p>Jogos e comandos de interação para animar o dia dos membros.</p>
             </div>
-        </section>
+            <div class="card">
+                <span class="emoji-img">💰</span>
+                <h3>Economia</h3>
+                <p>Sistema global de sonhos, cassino e loja customizável.</p>
+            </div>
+            <div class="card">
+                <span class="emoji-img">🛡️</span>
+                <h3>Moderação</h3>
+                <p>Mantenha seu servidor seguro com ferramentas de punição rápidas.</p>
+            </div>
+            <div class="card">
+                <span class="emoji-img">🎵</span>
+                <h3>Música</h3>
+                <p>Player de alta fidelidade para curtir playlists do Spotify/YouTube.</p>
+            </div>
+        </div>
+    </section>
 
-        <section id="parceiros">
-            <h2 class="section-title">Servidores Parceiros</h2>
-            <div class="partners-grid">
-                <div class="partner-item">
-                    <img src="https://cdn.discordapp.com/icons/1050800498346823752/a_4f0ca6d400d3be2911ee1ffa02a1c4b5.gif?size=2048" alt="CDE">
-                    <p>CDE</p>
-                </div>
-                <div class="partner-item">
-                    <img src="https://cdn.discordapp.com/icons/1046428911728337036/a_b322387854adce8f6d44a8d2279ec97b.gif?size=2048" alt="LUND">
-                    <p>LUND</p>
-                </div>
+    <section id="parceiros">
+        <h2 class="section-title">Servidores Parceiros</h2>
+        <div class="partners-grid">
+            <div class="partner-item">
+                <img src="https://cdn.discordapp.com/icons/1050800498346823752/a_4f0ca6d400d3be2911ee1ffa02a1c4b5.gif?size=2048" alt="CDE">
+                <p>CDE</p>
             </div>
-        </section>
-    </main>
+            <div class="partner-item">
+                <img src="https://cdn.discordapp.com/icons/1046428911728337036/a_b322387854adce8f6d44a8d2279ec97b.gif?size=2048" alt="LUND">
+                <p>LUND</p>
+            </div>
+            <div class="partner-item">
+                <img src="https://cdn.discordapp.com/avatars/1282729308452028448/a_195136dd3d4b8f9d127db39344253a8d.gif?size=2048" alt="BDR HOT">
+                <p>BDR HOT</p>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p>© 2026 Hayu Bot. Feito com 💜 para o seu Discord.</p>
+        <p>© 2026 Hayu Bot. Feito com 💜. Todos os direitos reservados.</p>
     </footer>
 
     <script>
+        // FORÇAR INÍCIO NO TOPO AO DAR F5
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
+
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // TEMA ESCURO POR PADRÃO
         const toggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateIcon(currentTheme);
+
         toggleBtn.addEventListener('click', () => {
             let theme = document.documentElement.getAttribute('data-theme');
             let newTheme = theme === 'dark' ? 'light' : 'dark';
+            
             document.documentElement.setAttribute('data-theme', newTheme);
-            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
         });
 
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        // STATCORD API INTEGRATION
         async function fetchStatcord() {
             try {
                 const res = await fetch('https://api.statcord.com/v1/stats/1096093392678694952');
@@ -217,9 +252,12 @@
                 if(json.data && json.data[0]) {
                     const data = json.data[0];
                     document.getElementById('servers').innerText = data.servers.toLocaleString() + '+';
-                    document.getElementById('users').innerText = (data.users / 1000).toFixed(0) + 'k+';
+                    document.getElementById('users').innerText = (data.users / 1000).toFixed(1) + 'k+';
+                    document.getElementById('commands').innerText = data.commands.toLocaleString();
                 }
-            } catch (e) { console.log("Stats Offline"); }
+            } catch (e) {
+                console.log("Statcord offline");
+            }
         }
         fetchStatcord();
     </script>
